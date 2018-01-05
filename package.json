@@ -1,6 +1,6 @@
 {
   "name": "react-selekt",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Ultra minimal multi-select component for React.",
   "main": "./dist/react-selekt.js",
   "scripts": {
