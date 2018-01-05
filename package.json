@@ -4,7 +4,9 @@
   "description": "Ultra minimal multi-select component for React.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
+    "test:watch": "npm test -- --watch",
+    "coverage": "nyc --require babel-register --reporter=lcov --reporter=text npm test",
     "start": "node examples/server.js",
     "build": "rm -rf dist/* && webpack -p --config webpack.production.config.js"
   },
@@ -33,10 +35,35 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.16.2",
+    "istanbul": "^1.0.0-alpha.2",
+    "jsdom": "^11.5.1",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^4.1.0",
+    "nyc": "^11.4.1",
+    "react-dom": "^16.2.0",
     "react-hot-loader": "^3.1.3",
+    "sinon": "^4.1.3",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7",
-    "react-dom": "^16.2.0"
+    "webpack-dev-server": "^2.9.7"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "**/test/**/*",
+      "packages/**/*"
+    ],
+    "sourceMap": true,
+    "instrument": true,
+    "require": [
+      "babel-register"
+    ],
+    "all": false
   }
 }
