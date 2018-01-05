@@ -1,4 +1,5 @@
 import React from 'react';
+import pt from 'prop-types';
 
 class Selekt extends React.Component {
 
@@ -34,8 +35,8 @@ class Selekt extends React.Component {
     const { options, selected } = props;
 
     this.setState({
-      options: options ? options : [],
-      selected: selected ? selected : []
+      options: options,
+      selected: selected
     })
   }
 
@@ -89,7 +90,7 @@ class Selekt extends React.Component {
           */
         }
 
-        <div className={(classes && classes.selector && classes.selector.wrapper) ? classes.selector.wrapper : ''}>
+        <div className={(classes && classes.selector && classes.selector.wrapper) ? classes.selector.wrapper : 'selekt-selector-wrapper'}>
           {
             headings &&
             headings.selector
@@ -100,14 +101,14 @@ class Selekt extends React.Component {
             onBlur={this._handleBlur}
             onChange={this._handleSearchChange}
             value={search}
-            className={(classes && classes.selector && classes.selector.input) ? classes.selector.input : ''}
+            className={(classes && classes.selector && classes.selector.input) ? classes.selector.input : 'selekt-selector-input'}
           />
           {
             /*
             * Render options window only if input is focused
             */
             focused &&
-            <ul className={(classes && classes.selector && classes.selector.ul) ? classes.selector.ul : ''}>
+            <ul className={(classes && classes.selector && classes.selector.ul) ? classes.selector.ul : 'selekt-selector-ul'}>
               {
                 options
                   // Filter the options, remove already selected and check search text
@@ -128,7 +129,7 @@ class Selekt extends React.Component {
                         key={i}
                         data-value={item}
                         onMouseDown={this._handleSelect}
-                        className={(classes && classes.selector && classes.selector.li) ? classes.selector.li : ''}
+                        className={(classes && classes.selector && classes.selector.li) ? classes.selector.li : 'selekt-selector-li'}
                       >
                         {item}
                       </li>
@@ -147,7 +148,7 @@ class Selekt extends React.Component {
           */
         }
 
-        <div className={(classes && classes.selected && classes.selected.wrapper) ? classes.selected.wrapper : ''}>
+        <div className={(classes && classes.selected && classes.selected.wrapper) ? classes.selected.wrapper : 'selekt-selected-wrapper'}>
           {
             headings && headings.selected &&
             headings.selected
@@ -155,7 +156,7 @@ class Selekt extends React.Component {
           {
 
             selected.length > 0 &&
-            <ul className={(classes && classes.selected && classes.selected.ul) ? classes.selected.ul : ''}>
+            <ul className={(classes && classes.selected && classes.selected.ul) ? classes.selected.ul : 'selekt-selected-ul'}>
               {
                 selected
                   .map((item, i) => {
@@ -164,7 +165,7 @@ class Selekt extends React.Component {
                         key={i}
                         data-value={item}
                         onClick={this._handleRemove}
-                        className={(classes && classes.selected && classes.selected.li) ? classes.selected.li : ''}
+                        className={(classes && classes.selected && classes.selected.li) ? classes.selected.li : 'selekt-selected-li'}
                       >
                         {item}
                       </li>
@@ -179,7 +180,32 @@ class Selekt extends React.Component {
     )
   }
 
-
 }
+
+/*
+* Selekt Property types
+*/
+Selekt.propTypes = {
+  options: pt.array.isRequired,
+  selected: pt.array.isRequired,
+  onChange: pt.func.isRequired,
+  headings: pt.shape({
+    selector: pt.element,
+    selected: pt.element
+  }),
+  classes: pt.shape({
+    selector: pt.shape({
+      wrapper: pt.string,
+      input: pt.string,
+      ul: pt.string,
+      li: pt.string,
+    }),
+    selected: pt.shape({
+      wrapper: pt.string,
+      ul: pt.string,
+      li: pt.string,
+    })
+  })
+};
 
 export default Selekt;
