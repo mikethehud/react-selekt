@@ -76,7 +76,7 @@ class Selekt extends React.Component {
   render() {
 
     const { options, selected, focused, search } = this.state;
-    const { headings, classes } = this.props;
+    const { headings, classes, placeholder } = this.props;
 
     return (
 
@@ -101,6 +101,7 @@ class Selekt extends React.Component {
             onBlur={this._handleBlur}
             onChange={this._handleSearchChange}
             value={search}
+            placeholder={placeholder ? placeholder : ''}
             className={(classes && classes.selector && classes.selector.input) ? classes.selector.input : 'selekt-selector-input'}
           />
           {
@@ -189,6 +190,7 @@ Selekt.propTypes = {
   options: pt.array.isRequired,
   selected: pt.array.isRequired,
   onChange: pt.func.isRequired,
+  placeholder: pt.string,
   headings: pt.shape({
     selector: pt.element,
     selected: pt.element

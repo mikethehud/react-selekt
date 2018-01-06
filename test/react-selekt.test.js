@@ -175,4 +175,9 @@ describe('<Selekt />', () => {
     expect(wrapper.find('.selekt-selector-li')).to.have.length(1);
   })
 
+  it('renders a placeholder if one is given', () => {
+    const wrapper = mount(<Selekt {...minProps} placeholder="Testplaceholder" />);
+    expect(wrapper.find('.selekt-selector-input').prop('placeholder')).to.equal('Testplaceholder');
+  })
+
 })
