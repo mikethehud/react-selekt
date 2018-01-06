@@ -8,7 +8,7 @@
     "test:watch": "npm test -- --watch",
     "coverage": "nyc --require babel-register --reporter=lcov --reporter=text npm test",
     "start": "node examples/server.js",
-    "build": "rm -rf dist/* && webpack -p --config webpack.production.config.js"
+    "build": "rimraf dist && webpack -p --config webpack.production.config.js"
   },
   "repository": {
     "type": "git",
