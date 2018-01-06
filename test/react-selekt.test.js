@@ -119,18 +119,21 @@ describe('<Selekt />', () => {
     expect(wrapper.find('.selekt-selected-li')).to.have.length(1);
   })
 
-  it('adds one selected-li when a selector-li is selected', () => {
+  it('adds one selected-li when a selector-li is selected and clears the input field', () => {
     const onChange = sinon.spy();
     const wrapper = mount(<Selekt {...minProps} onChange={onChange} />);
     const input = wrapper.find('.selekt-selector-input');
+    input.simulate('focus');
+    input.instance().value = 'o';
+    input.simulate('change', input);
+
 
     // expected to be false since we never changed anything
     expect(onChange.calledOnce).to.equal(false);
 
-    input.simulate('focus');
-
     const initialSelectedLength = wrapper.find('.selekt-selected-li').length;
 
+    expect(input.instance().value).to.equal('o');
     wrapper.find('.selekt-selector-li').first().simulate('mousedown');
 
     // expected to be true since we now changed something
@@ -139,6 +142,9 @@ describe('<Selekt />', () => {
     // returning selected arg should be one more
     let selectedArgs = onChange.getCall(0).args;
     expect(selectedArgs[0].length).to.equal(initialSelectedLength + 1);
+
+    // cleared input field
+    expect(input.instance().value).to.equal('');
   })
 
   it('removes one selected-li when it is clicked', () => {
@@ -156,7 +162,8 @@ describe('<Selekt />', () => {
     const wrapper = mount(<Selekt {...minProps} />);
     const input = wrapper.find('.selekt-selector-input');
     input.simulate('focus');
-    input.simulate('change', { target: { value: 'testsearch' } });
+    input.instance().value = 'testsearch';
+    input.simulate('change', input)
 
     expect(wrapper.state('search')).to.equal('testsearch');
   })

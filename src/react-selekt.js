@@ -52,6 +52,9 @@ class Selekt extends React.Component {
     let value = e.target.dataset.value;
 
     let selected = this.state.selected.concat(value);
+
+    // Clear input
+    this._clearInput();
     // Send update to onChange method
     this.props.onChange(selected);
   }
@@ -60,9 +63,9 @@ class Selekt extends React.Component {
     let value = e.target.dataset.value;
 
     let selected = this.state.selected.filter((item) => item != value);
+
     // Send update to onChange method
     this.props.onChange(selected);
-    this._clearInput();
   }
 
   _handleSearchChange = (e) => {
