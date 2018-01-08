@@ -36,6 +36,7 @@ class App extends React.Component {
         <Selekt
           options={['ReactJS', 'NodeJS', 'Express', 'Webpack']}
           selected={this.state.selected}
+          placeholder='Select libraries'
           headings={{
             selector: <h1>Select your favorite libraries.</h1>,
             selected: <h2>Your favorite libraries</h2>
@@ -67,11 +68,11 @@ This generates the following HTML:
 <div>
   <div class="selector-wrapper">
     <h1>Select your favorite libraries.</h1>
-    <input type="text" value="" class="selector-input">
+    <input type="text" value="" placeholder="Select libraries" class="selector-input">
     <ul class="selector-ul">
-      <li data-vaöue="ReactJS" class="selector-li">ReactJS</li>
-      <li data-vaöue="ReactJS" class="selector-li">NodeJS</li>
-      <li data-vaöue="ReactJS" class="selector-li">Webpack</li>
+      <li data-value="ReactJS" class="selector-li">ReactJS</li>
+      <li data-value="ReactJS" class="selector-li">NodeJS</li>
+      <li data-value="ReactJS" class="selector-li">Webpack</li>
     </ul>
   </div>
   <div class="selected-wrapper">
